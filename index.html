@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mi San Valentin de mi corazon 💖</title>
+    <title>Mi San Valentín de mi corazón 💖</title>
 
     <!-- Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -75,7 +75,7 @@
       #noBtn {
         background: #ccc;
         color: #555;
-        pointer-events: none; /* NEVER CLICKABLE */
+        pointer-events: none; /* NUNCA SE PUEDE CLICKEAR */
       }
 
       .note {
@@ -88,14 +88,14 @@
   <body>
     <div class="card" id="card">
       <div class="emoji">🐣💗</div>
-      <h1>Amor de mi vida, quieres ser mi San Valentin? intenta darle no</h1>
+      <h1>Amor de mi vida, ¿quieres ser mi San Valentín? Intenta darle a “No” 😏</h1>
 
       <div class="buttons" id="buttons">
-        <button id="yesBtn">SII 💖</button>
+        <button id="yesBtn">SÍ 💖</button>
         <button id="noBtn">NO 🙃</button>
       </div>
 
-      <div class="note">*No no es una opcion jeje 😈*</div>
+      <div class="note">*“No” no es una opción jeje 😈*</div>
     </div>
 
     <script>
@@ -105,9 +105,9 @@
       let escaped = false;
       let initialRect = null;
 
-      function escapeNoButton() {
+      function escaparBotonNo() {
         if (!escaped) {
-          // LOCK INITIAL POSITION (INSIDE CARD)
+          // BLOQUEAR POSICIÓN INICIAL (DENTRO DE LA TARJETA)
           initialRect = noBtn.getBoundingClientRect();
 
           noBtn.style.position = "fixed";
@@ -121,37 +121,37 @@
         const yesRect = yesBtn.getBoundingClientRect();
         const noRect = noBtn.getBoundingClientRect();
 
-        let x, y, safe;
+        let x, y, seguro;
 
         do {
           x = Math.random() * (window.innerWidth - noRect.width - padding);
           y = Math.random() * (window.innerHeight - noRect.height - padding);
 
-          safe =
+          seguro =
             x + noRect.width < yesRect.left ||
             x > yesRect.right ||
             y + noRect.height < yesRect.top ||
             y > yesRect.bottom;
-        } while (!safe);
+        } while (!seguro);
 
         noBtn.style.left = `${x}px`;
         noBtn.style.top = `${y}px`;
       }
 
-      // Desktop: flee when cursor is near
+      // En compu: huye cuando el cursor se acerca
       document.addEventListener("mousemove", (e) => {
         const rect = noBtn.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;
         const cy = rect.top + rect.height / 2;
 
         const distance = Math.hypot(e.clientX - cx, e.clientY - cy);
-        if (distance < 130) escapeNoButton();
+        if (distance < 130) escaparBotonNo();
       });
 
-      // Mobile: flee on touch
-      document.addEventListener("touchstart", escapeNoButton);
+      // En celular: huye al tocar la pantalla
+      document.addEventListener("touchstart", escaparBotonNo);
 
-      // YES = HEART ATTACK
+      // SÍ = confeti 🎉
       yesBtn.addEventListener("click", () => {
         const end = Date.now() + 3500;
 
